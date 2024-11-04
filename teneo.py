@@ -95,7 +95,7 @@ async def connect_to_wss(user_id):
             await asyncio.sleep(backoff_time)
             backoff_time = min(backoff_time * 2, 30)  # Exponential backoff with a cap
 async def main():
-    user_id = '95f0d9f5-6515-484a-849d-19993b34ad87'
+    user_id = input('Masukkan User ID : ')#'95f0d9f5-6515-484a-849d-19993b34ad87'
     await connect_to_wss(user_id)
 
 if __name__ == '__main__':
