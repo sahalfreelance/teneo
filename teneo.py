@@ -8,12 +8,23 @@ import os
 from loguru import logger
 import websockets
 from fake_useragent import UserAgent
-
+banner = """\033[36m
+████████╗███████╗███╗   ██╗███████╗ ██████╗ 
+╚══██╔══╝██╔════╝████╗  ██║██╔════╝██╔═══██╗
+   ██║   █████╗  ██╔██╗ ██║█████╗  ██║   ██║
+   ██║   ██╔══╝  ██║╚██╗██║██╔══╝  ██║   ██║
+   ██║   ███████╗██║ ╚████║███████╗╚██████╔╝
+   ╚═╝   ╚══════╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ Node
+------------------------------------------------
+            Author : Sahal Pramudya
+------------------------------------------------\n"""
 # Get a random User-Agent for requests
 useragent = UserAgent(os='windows', platforms='pc', browsers='chrome')
 user_agent = useragent.random
+print(banner)
+user_id = input("Masukkan User ID : ")#'95f0d9f5-6515-484a-849d-19993b34ad87'
+uri = 'wss://secure.ws.teneo.pro/websocket?userId={}&version=v0.2'.format(user_id)
 
-uri = 'wss://secure.ws.teneo.pro/websocket?userId=95f0d9f5-6515-484a-849d-19993b34ad87&version=v0.2'
 
 async def send_ping(websocket):
     """Function to send PING messages at intervals."""
@@ -95,7 +106,6 @@ async def connect_to_wss(user_id):
             await asyncio.sleep(backoff_time)
             backoff_time = min(backoff_time * 2, 30)  # Exponential backoff with a cap
 async def main():
-    user_id = input('Masukkan User ID : ')#'95f0d9f5-6515-484a-849d-19993b34ad87'
     await connect_to_wss(user_id)
 
 if __name__ == '__main__':
