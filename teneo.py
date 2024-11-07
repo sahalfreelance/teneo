@@ -99,9 +99,6 @@ async def connect_to_wss(user_id):
         except Exception as e:
             logger.error(f"Connection error: {e} with URI: {uri}")
             logger.info(f"Retrying with a different URI in {backoff_time} seconds...")
-
-            # Increment to switch to the next URI
-            uri_index = (uri_index + 1) % len(ws_uris)  # Cycle through URIs
             
             await asyncio.sleep(backoff_time)
             backoff_time = min(backoff_time * 2, 30)  # Exponential backoff with a cap
