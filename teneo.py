@@ -23,7 +23,7 @@ useragent = UserAgent(os='windows', platforms='pc', browsers='chrome')
 user_agent = useragent.random
 print(banner)
 user_id = input("Masukkan User ID : ")#'95f0d9f5-6515-484a-849d-19993b34ad87'
-uri = 'wss://secure.ws.teneo.pro/websocket?userId={}&version=v0.2'.format(user_id)
+uri = 'wss://secure.ws.teneo.pro/websocket?accessToken={}&version=v0.2'.format(user_id)
 
 
 async def send_ping(websocket):
